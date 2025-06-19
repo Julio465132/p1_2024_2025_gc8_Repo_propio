@@ -7,9 +7,7 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
-import java.io.FileReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +17,7 @@ public class LectorCSV {
     private final Gson conversor;
 
     // Se prepara el objeto Gson con formato bonito para el archivo de salida
-    public GestorJSON() {
+    public LectorCSV() {
         this.conversor = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
@@ -38,6 +36,14 @@ public class LectorCSV {
         } catch (Exception error) {
             System.err.println("No se pudo leer el archivo JSON: " + error.getMessage());
             return new ArrayList<>();
+        }
+    }
+    public void guardarComoJSON(Map<String, ArrayList<Turismo>> datosAgrupados, String rutaSalida) {
+        try (FileWriter escritor = new FileWriter(rutaSalida)) {
+            conversor.toJson(datosAgrupados, escritor);
+            System.out.println("Archivo JSON guardado en: " + rutaSalida);
+        } catch (IOException error) {
+            System.err.println("Error al escribir en el JSON: " + error.getMessage());
         }
     }
 }
