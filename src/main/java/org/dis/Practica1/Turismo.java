@@ -45,5 +45,14 @@ public class Turismo {
     public void setNumeroTuristas(int numeroTuristas) {
         this.numeroTuristas = numeroTuristas;
     }
+    @Override
+    public String toString() {
+        return "Turismo{" +
+                "origenViaje=" + origenViaje +
+                ", destinoViaje=" + destinoViaje +
+                ", periodoDatos=" + periodoDatos +
+                ", numeroTuristas=" + numeroTuristas +
+          '}';
+    }
 
 }
