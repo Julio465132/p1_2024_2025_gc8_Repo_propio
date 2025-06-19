@@ -28,4 +28,11 @@ public class Origen {
     public void setComunidadSalida(String comunidadSalida) {
         this.comunidadSalida = comunidadSalida;
     }
+    @Override
+    public String toString() {
+        return "Origen{" +
+                "provinciaSalida='" + provinciaSalida + '\'' +
+                ", comunidadSalida='" + comunidadSalida + '\'' +
+          '}';
+    }
 }
