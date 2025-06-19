@@ -28,4 +28,11 @@ public class Destino {
     public void setZonaDestino(String zonaDestino) {
         this.zonaDestino = zonaDestino;
     }
+    @Override
+    public String toString() {
+        return "Destino{" +
+                "regionDestino='" + regionDestino + '\'' +
+                ", zonaDestino='" + zonaDestino + '\'' +
+          '}';
+    }
 }
