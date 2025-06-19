@@ -9,4 +9,23 @@ public class Destino {
         this.regionDestino = regionDestino;
         this.zonaDestino = zonaDestino;
     }
+    // Devuelve la comunidad del destino
+    public String getRegionDestino() {
+        return regionDestino;
+    }
+
+    // Devuelve la provincia del destino
+    public String getZonaDestino() {
+        return zonaDestino;
+    }
+
+    // Cambia el valor de la comunidad
+    public void setRegionDestino(String regionDestino) {
+        this.regionDestino = regionDestino;
+    }
+
+    // Cambia el valor de la provincia
+    public void setZonaDestino(String zonaDestino) {
+        this.zonaDestino = zonaDestino;
+    }
 }
