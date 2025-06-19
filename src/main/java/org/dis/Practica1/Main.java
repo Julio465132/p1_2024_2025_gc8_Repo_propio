@@ -1,5 +1,6 @@
 package org.dis.Practica1;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -27,6 +28,18 @@ public class Main {
 
                 opcion = teclado.nextInt();
             }
+        }
+    }
+    public static void limpiarPantalla() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void esperarTecla() {
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
