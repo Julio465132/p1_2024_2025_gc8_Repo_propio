@@ -12,6 +12,21 @@ public class Main {
         boolean csvCargando = false;
         boolean seguirEjecutando = true;
 
+        while(seguirEjecutando){
+            int opcion;
+            do{
+                System.out.print("""
+                        MENÚ PRINCIPAL
 
+                        1. Convertir CSV a JSON
+                        2. Agrupar por comunidad de destino
+                        3. Buscar resultados por periodo
+                        4. Buscar resultados por origen
+                        5. Salir
+                        => """);
+
+                opcion = teclado.nextInt();
+            }
+        }
     }
 }
