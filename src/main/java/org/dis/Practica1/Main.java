@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
-        boolean csvCargando = false;
+        boolean csvCargado = false;
         boolean seguirEjecutando = true;
 
         while(seguirEjecutando){
@@ -27,6 +27,19 @@ public class Main {
                         => """);
 
                 opcion = teclado.nextInt();
+                limpiarPantalla();
+
+                if (opcion < 1 || opcion > 5) {
+                    System.out.println("Opción no válida.");
+                }
+
+                if (opcion == 1) {
+                    csvCargado = true;
+                } else if (!csvCargado && opcion != 5) {
+                    System.out.println("Primero debes convertir el CSV.\nPulsa Enter para continuar...");
+                    esperarTecla();
+                    limpiarPantalla();
+                }
             }
         }
     }
