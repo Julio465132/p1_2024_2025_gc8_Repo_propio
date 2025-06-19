@@ -41,4 +41,13 @@ public class Periodo {
     public void setCodigoPeriodo(String codigoPeriodo) {
         this.codigoPeriodo = codigoPeriodo;
     }
+    // Método toString para mostrar los datos del periodo
+    @Override
+    public String toString() {
+        return "Periodo{" +
+                "inicioPeriodo='" + inicioPeriodo + '\'' +
+                ", finPeriodo='" + finPeriodo + '\'' +
+                ", codigoPeriodo='" + codigoPeriodo + '\'' +
+          '}';
+    }
 }
