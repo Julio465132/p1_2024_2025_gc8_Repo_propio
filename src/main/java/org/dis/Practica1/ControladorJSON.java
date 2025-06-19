@@ -13,36 +13,5 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ControladorJSON {
-    private final Gson conversor;
 
-    // Se prepara el objeto Gson con formato bonito para el archivo de salida
-    public ControladorJSON() {
-        this.conversor = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-    }
-    /**
-     * Carga los datos desde un archivo JSON ubicado en resources.
-     * Devuelve una lista de objetos Turismo cargados desde el fichero.
-     */
-    public ArrayList<Turismo> cargarDesdeJSON() {
-        try (InputStream entrada = getClass().getClassLoader().getResourceAsStream("TurismoComunidades.json");
-             InputStreamReader lector = new InputStreamReader(entrada)) {
-
-            Type tipoLista = new TypeToken<ArrayList<Turismo>>() {}.getType();
-            return conversor.fromJson(lector, tipoLista);
-
-        } catch (Exception error) {
-            System.err.println("No se pudo leer el archivo JSON: " + error.getMessage());
-            return new ArrayList<>();
-        }
-    }
-    public void guardarComoJSON(Map<String, ArrayList<Turismo>> datosAgrupados, String rutaSalida) {
-        try (FileWriter escritor = new FileWriter(rutaSalida)) {
-            conversor.toJson(datosAgrupados, escritor);
-            System.out.println("Archivo JSON guardado en: " + rutaSalida);
-        } catch (IOException error) {
-            System.err.println("Error al escribir en el JSON: " + error.getMessage());
-        }
-    }
 }
