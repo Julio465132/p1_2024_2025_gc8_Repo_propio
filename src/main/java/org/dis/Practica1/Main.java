@@ -1,6 +1,9 @@
 package org.dis.Practica1;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -40,6 +43,10 @@ public class Main {
                     esperarTecla();
                     limpiarPantalla();
                 }
+            }while ((opcion < 1 || opcion > 5) || (!csvCargado && opcion != 5));
+
+            switch (opcion) {
+
             }
         }
     }
@@ -55,4 +62,54 @@ public class Main {
             e.printStackTrace();
         }
     }
-}
+    public static void agruparPorComunidad() {
+        ControladorJSON jsonControlador = new ControladorJSON();
+        ArrayList<Turismo> lista = jsonControlador.leerArchivoJSON();
+
+        Map<String, ArrayList<Turismo>> agrupado = new HashMap<>();
+
+        for (Turismo t : lista) {
+            String comunidad = t.getDestinoViaje().getRegionDestino();
+            agrupado.putIfAbsent(comunidad, new ArrayList<>());
+            agrupado.get(comunidad).add(t);
+        }
+
+        jsonControlador.guardarComoJSON(agrupado, rutaJsonAgrupado);
+        System.out.println("Datos agrupados correctamente.\nPulsa Enter para continuar...");
+        esperarTecla();
+        limpiarPantalla();
+    }
+    public static void consultarPorFecha() {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Turismo> lista = new ControladorJSON().leerArchivoJSON();
+
+        System.out.println("Introduce la fecha (AAAA-MM-DD):");
+        String entradaFecha = sc.nextLine();
+
+        String[] partes = entradaFecha.split("-");
+        if (partes.length == 3) {
+            String periodo = partes[0] + "M" + partes[1];
+            System.out.println("Mostrando datos para el periodo: " + periodo);
+            for (Turismo t : lista) {
+                if (t.getPeriodoDatos().getCodigoPeriodo().equalsIgnoreCase(periodo)) {
+                    String resultado = t.toString()
+                            .replaceAll("origenViaje=", "")
+                            .replaceAll("destinoViaje=", "")
+                            .replaceAll("periodoDatos=", "")
+                            .replaceAll("=", ": ")
+                            .replaceAll("\\{", "")
+                            .replaceAll("}", "")
+                            .replaceAll("'", "")
+                            .replaceAll("\\s+", " ")
+                            .trim();
+                    System.out.println(resultado);
+                }
+            }
+        } else {
+            System.out.println("Formato incorrecto. Debe ser: AAAA-MM-DD");
+        }
+        System.out.println("Pulsa Enter para continuar...");
+        esperarTecla();
+        limpiarPantalla();
+        }
+    }
