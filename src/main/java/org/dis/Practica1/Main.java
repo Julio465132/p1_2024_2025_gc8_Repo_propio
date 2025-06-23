@@ -74,26 +74,32 @@ public class Main {
         }
     }
     public static void agruparPorComunidad() {
-        ControladorJSON jsonControlador = new ControladorJSON();
-        ArrayList<Turismo> lista = jsonControlador.leerArchivoJSON();
+        ArrayList<Turismo> lista = new ControladorJSON().leerArchivoJSON(Main.rutaJson);
 
         Map<String, ArrayList<Turismo>> agrupado = new HashMap<>();
 
         for (Turismo t : lista) {
-            String comunidad = t.getDestinoViaje().getRegionDestino();
-            agrupado.putIfAbsent(comunidad, new ArrayList<>());
-            agrupado.get(comunidad).add(t);
+            if (t.getDestinoViaje() != null) {
+                String comunidad = (t.getDestinoViaje().getRegionDestino() != null)
+                        ? t.getDestinoViaje().getRegionDestino()
+                        : "";
+                agrupado.computeIfAbsent(comunidad, k -> new ArrayList<>()).add(t);
+                agrupado.get(comunidad).add(t);
+            } else {
+                // Opcional: puedes agruparlos como "" o saltarlos
+                agrupado.computeIfAbsent("", k -> new ArrayList<>()).add(t);
+            }
         }
 
-        jsonControlador.guardarComoJSON(agrupado, rutaJsonAgrupado);
+        new ControladorJSON().guardarComoJSON(agrupado, Main.rutaJsonAgrupado);
+
         System.out.println("Datos agrupados correctamente.\nPulsa Enter para continuar...");
         esperarTecla();
         limpiarPantalla();
     }
     public static void consultarPorFecha() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Turismo> lista = new ControladorJSON().leerArchivoJSON();
-
+        ArrayList<Turismo> lista = new ControladorJSON().leerArchivoJSON(Main.rutaJson);
         System.out.println("Introduce la fecha (AAAA-MM-DD):");
         String entradaFecha = sc.nextLine();
 
