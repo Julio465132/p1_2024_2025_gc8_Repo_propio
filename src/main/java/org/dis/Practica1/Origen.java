@@ -1,38 +1,43 @@
 package org.dis.Practica1;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Origen {
-    private String provinciaSalida;
-    private String comunidadSalida;
-    // Constructor para inicializar los datos del origen
-    public Origen(String provinciaSalida, String comunidadSalida) {
-        this.provinciaSalida = provinciaSalida;
-        this.comunidadSalida = comunidadSalida;
+
+    @SerializedName("comunidad")
+    private String comunidad;
+
+    @SerializedName("provincia")
+    private String provincia;
+
+    public Origen() {}
+
+    public Origen(String provincia, String comunidad) {
+        this.provincia = provincia;
+        this.comunidad = comunidad;
     }
 
-    // Getter de provincia
-    public String getProvinciaSalida() {
-        return provinciaSalida;
+    public String getComunidad() {
+        return comunidad;
     }
 
-    // Setter de provincia
-    public void setProvinciaSalida(String provinciaSalida) {
-        this.provinciaSalida = provinciaSalida;
+    public void setComunidad(String comunidad) {
+        this.comunidad = comunidad;
     }
 
-    // Getter de comunidad
-    public String getComunidadSalida() {
-        return comunidadSalida;
+    public String getProvincia() {
+        return provincia;
     }
 
-    // Setter de comunidad
-    public void setComunidadSalida(String comunidadSalida) {
-        this.comunidadSalida = comunidadSalida;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
+
     @Override
     public String toString() {
         return "Origen{" +
-                "provinciaSalida='" + provinciaSalida + '\'' +
-                ", comunidadSalida='" + comunidadSalida + '\'' +
-          '}';
+                "comunidad='" + comunidad + '\'' +
+                ", provincia='" + provincia + '\'' +
+            '}';
     }
 }

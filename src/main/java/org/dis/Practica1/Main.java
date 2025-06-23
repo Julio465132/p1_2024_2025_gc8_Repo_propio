@@ -80,8 +80,8 @@ public class Main {
 
         for (Turismo t : lista) {
             if (t.getDestinoViaje() != null) {
-                String comunidad = (t.getDestinoViaje().getRegionDestino() != null)
-                        ? t.getDestinoViaje().getRegionDestino()
+                String comunidad = (t.getDestinoViaje().getComunidad() != null)
+                        ? t.getDestinoViaje().getComunidad()
                         : "";
                 agrupado.computeIfAbsent(comunidad, k -> new ArrayList<>()).add(t);
                 agrupado.get(comunidad).add(t);
@@ -157,5 +157,5 @@ public class Main {
         }
 
         return entrada;
-        }
     }
+}
