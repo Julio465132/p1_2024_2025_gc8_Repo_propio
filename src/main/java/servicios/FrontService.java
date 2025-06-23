@@ -2,6 +2,7 @@ package servicios;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.dis.Practica1.Turismo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
