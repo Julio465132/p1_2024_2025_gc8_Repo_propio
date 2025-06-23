@@ -56,8 +56,21 @@ public class Main {
                 }
                 case 2 -> agruparPorComunidad();
                 case 3 -> consultarPorFecha();
-                case 4 -> consultarPorProvincia();
-                case 5 -> seguirEjecutando=false;
+                case 4 -> {
+                    String provincia = consultarPorProvincia();
+                    ArrayList<Turismo> lista = new ControladorJSON().leerArchivoJSON(rutaJson);
+
+                    for (Turismo t : lista) {
+                        if (t.getOrigenViaje() != null &&
+                                provincia.equalsIgnoreCase(t.getOrigenViaje().getProvinciaSalida())) {
+                            System.out.println(t);
+                        }
+                    }
+
+                    System.out.println("Pulsa Enter para continuar...");
+                    esperarTecla();
+                    limpiarPantalla();
+                }               case 5 -> seguirEjecutando=false;
             }
         }
     }
@@ -80,8 +93,8 @@ public class Main {
 
         for (Turismo t : lista) {
             if (t.getDestinoViaje() != null) {
-                String comunidad = (t.getDestinoViaje().getRegionDestino() != null)
-                        ? t.getDestinoViaje().getRegionDestino()
+                String comunidad = (t.getDestinoViaje().getComunidad() != null)
+                        ? t.getDestinoViaje().getComunidad()
                         : "";
                 agrupado.computeIfAbsent(comunidad, k -> new ArrayList<>()).add(t);
                 agrupado.get(comunidad).add(t);
@@ -151,11 +164,13 @@ public class Main {
         };
 
         for (String[] ex : excepciones) {
-            if (ex[0].equals(entrada)) {
+            if (ex[0].equalsIgnoreCase(entrada)) {
                 return ex[1];
             }
         }
 
         return entrada;
-        }
     }
+
+
+}
