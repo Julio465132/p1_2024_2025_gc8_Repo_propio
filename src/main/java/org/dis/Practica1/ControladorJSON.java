@@ -13,17 +13,9 @@ import java.util.Map;
 
 public class ControladorJSON {
     // Método para leer el archivo JSON y convertirlo en una lista de objetos Turismo
-    public ArrayList<Turismo> leerArchivoJSON() {
-        try {
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(
-                    getClass().getClassLoader().getResourceAsStream("TurismoComunidades.json")));
-
-            ArrayList<Turismo> datosTurismo = new Gson().fromJson(
-                    buffer, new TypeToken<ArrayList<Turismo>>() {}.getType());
-
-            buffer.close();
-            return datosTurismo;
-
+    public ArrayList<Turismo> leerArchivoJSON(String ruta) {
+        try (Reader reader = new FileReader(ruta)) {
+            return new Gson().fromJson(reader, new TypeToken<ArrayList<Turismo>>() {}.getType());
         } catch (IOException e) {
             System.out.println("Error al leer JSON: " + e.getMessage());
             return new ArrayList<>();
@@ -41,4 +33,7 @@ public class ControladorJSON {
             System.out.println("Error al escribir JSON: " + e.getMessage());
         }
     }
+
 }
+
+
