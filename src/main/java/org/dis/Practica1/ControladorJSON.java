@@ -1,48 +1,38 @@
 package org.dis.Practica1;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.dis.Practica1.Turismo;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class ControladorJSON {
-    private final Gson conversor;
-
-    // Se prepara el objeto Gson con formato bonito para el archivo de salida
-    public ControladorJSON() {
-        this.conversor = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-    }
-    /**
-     * Carga los datos desde un archivo JSON ubicado en resources.
-     * Devuelve una lista de objetos Turismo cargados desde el fichero.
-     */
-    public ArrayList<Turismo> cargarDesdeJSON() {
-        try (InputStream entrada = getClass().getClassLoader().getResourceAsStream("TurismoComunidades.json");
-             InputStreamReader lector = new InputStreamReader(entrada)) {
-
-            Type tipoLista = new TypeToken<ArrayList<Turismo>>() {}.getType();
-            return conversor.fromJson(lector, tipoLista);
-
-        } catch (Exception error) {
-            System.err.println("No se pudo leer el archivo JSON: " + error.getMessage());
+    // Método para leer el archivo JSON y convertirlo en una lista de objetos Turismo
+    public ArrayList<Turismo> leerArchivoJSON(String ruta) {
+        try (Reader reader = new FileReader(ruta)) {
+            return new Gson().fromJson(reader, new TypeToken<ArrayList<Turismo>>() {}.getType());
+        } catch (IOException e) {
+            System.out.println("Error al leer JSON: " + e.getMessage());
             return new ArrayList<>();
         }
     }
-    public void guardarComoJSON(Map<String, ArrayList<Turismo>> datosAgrupados, String rutaSalida) {
-        try (FileWriter escritor = new FileWriter(rutaSalida)) {
-            conversor.toJson(datosAgrupados, escritor);
-            System.out.println("Archivo JSON guardado en: " + rutaSalida);
-        } catch (IOException error) {
-            System.err.println("Error al escribir en el JSON: " + error.getMessage());
-        }
+    // Método para escribir un mapa con los datos agrupados a un JSON nuevo
+    public void guardarComoJSON(Map<String, ArrayList<Turismo>> agrupado, String rutaDestino) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT); // hace que el JSON tenga saltos de línea y sangría
+
+        try (FileWriter escritor = new FileWriter(rutaDestino)) {
+            mapper.writeValue(escritor, agrupado);
+            System.out.println("Archivo JSON escrito correctamente en: " + rutaDestino);
+        } catch (IOException e) {
+            System.out.println("Error al escribir JSON: " + e.getMessage());
     }
+    }
+
 }
