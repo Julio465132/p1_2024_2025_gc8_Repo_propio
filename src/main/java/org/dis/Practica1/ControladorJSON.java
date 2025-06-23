@@ -1,4 +1,5 @@
-package org.dis.Practica1;
+Lector:
+        package org.dis.Practica1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -31,9 +32,7 @@ public class ControladorJSON {
             System.out.println("Archivo JSON escrito correctamente en: " + rutaDestino);
         } catch (IOException e) {
             System.out.println("Error al escribir JSON: " + e.getMessage());
-        }
+    }
     }
 
 }
-
-
