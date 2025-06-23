@@ -41,5 +41,17 @@ public class FrontService {
             throw new RuntimeException(e);
         }
     }
+    public Turismo getTurismo(String id) throws IOException, InterruptedException, URISyntaxException {
+        String url = String.format("%s/db/%s", URL_API, id);
+        HttpClient client = HttpClient.newHttpClient();
 
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(url))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        Gson gson = new Gson();
+        return gson.fromJson(response.body(), Turismo.class);
+    }
 }
