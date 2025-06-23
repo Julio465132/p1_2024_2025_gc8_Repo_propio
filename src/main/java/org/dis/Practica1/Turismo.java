@@ -1,11 +1,25 @@
 package org.dis.Practica1;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Turismo {
+
+    @SerializedName("origen")
     private Origen origenViaje;
+
+    @SerializedName("destino")
     private Destino destinoViaje;
+
+    @SerializedName("periodo")
     private Periodo periodoDatos;
+
+    @SerializedName("total")
     private int numeroTuristas;
-    // Constructor principal
+
+    public Turismo() {
+        // Constructor vacío necesario para Gson
+    }
+
     public Turismo(Origen origenViaje, Destino destinoViaje, Periodo periodoDatos, int numeroTuristas) {
         this.origenViaje = origenViaje;
         this.destinoViaje = destinoViaje;
@@ -13,7 +27,6 @@ public class Turismo {
         this.numeroTuristas = numeroTuristas;
     }
 
-    // Getters y setters
     public Origen getOrigenViaje() {
         return origenViaje;
     }
@@ -45,6 +58,7 @@ public class Turismo {
     public void setNumeroTuristas(int numeroTuristas) {
         this.numeroTuristas = numeroTuristas;
     }
+
     @Override
     public String toString() {
         return "Turismo{" +
@@ -52,7 +66,6 @@ public class Turismo {
                 ", destinoViaje=" + destinoViaje +
                 ", periodoDatos=" + periodoDatos +
                 ", numeroTuristas=" + numeroTuristas +
-          '}';
-    }
-
+            '}';
+}
 }

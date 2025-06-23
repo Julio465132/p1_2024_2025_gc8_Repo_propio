@@ -1,53 +1,56 @@
 package org.dis.Practica1;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Periodo {
-    private String inicioPeriodo;
-    private String finPeriodo;
+
+    @SerializedName("fecha_inicio")
+    private String fechaInicio;
+
+    @SerializedName("fecha_fin")
+    private String fechaFin;
+
+    @SerializedName("periodo")
     private String codigoPeriodo;
 
-    // Constructor para inicializar los campos
-    public Periodo(String inicioPeriodo, String finPeriodo, String codigoPeriodo) {
-        this.inicioPeriodo = inicioPeriodo;
-        this.finPeriodo = finPeriodo;
+    public Periodo() {}
+
+    public Periodo(String fechaInicio, String fechaFin, String codigoPeriodo) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.codigoPeriodo = codigoPeriodo;
     }
 
-    // Getter de la fecha de inicio
-    public String getInicioPeriodo() {
-        return inicioPeriodo;
+    public String getFechaInicio() {
+        return fechaInicio;
     }
 
-    // Setter de la fecha de inicio
-    public void setInicioPeriodo(String inicioPeriodo) {
-        this.inicioPeriodo = inicioPeriodo;
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    // Getter de la fecha de fin
-    public String getFinPeriodo() {
-        return finPeriodo;
+    public String getFechaFin() {
+        return fechaFin;
     }
 
-    // Setter de la fecha de fin
-    public void setFinPeriodo(String finPeriodo) {
-        this.finPeriodo = finPeriodo;
+    public void setFechaFin(String fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
-    // Getter del código del periodo
     public String getCodigoPeriodo() {
         return codigoPeriodo;
     }
 
-    // Setter del código del periodo
     public void setCodigoPeriodo(String codigoPeriodo) {
         this.codigoPeriodo = codigoPeriodo;
     }
-    // Método toString para mostrar los datos del periodo
+
     @Override
     public String toString() {
         return "Periodo{" +
-                "inicioPeriodo='" + inicioPeriodo + '\'' +
-                ", finPeriodo='" + finPeriodo + '\'' +
+                "fechaInicio='" + fechaInicio + '\'' +
+                ", fechaFin='" + fechaFin + '\'' +
                 ", codigoPeriodo='" + codigoPeriodo + '\'' +
-          '}';
-    }
+            '}';
+}
 }
